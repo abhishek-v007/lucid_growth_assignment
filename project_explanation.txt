@@ -1,0 +1,91 @@
+# filtered Competitor
+
+I. Description
+
+This script filters companies from a CSV file based on specific services they offer. 
+The script loads a CSV file named competitor.csv, extracts the column names, defines a list of relevant services related to bulk email sending and management, 
+filters the companies based on those services, and saves the filtered companies to a new CSV file named filtered_companies.csv.
+
+II. Requirements
+
+    Python 3
+    CSV file (Clay.com)
+
+III. Usage
+
+    Place the competitor.csv file in the same directory as the script.
+    Run the script using Python 3: python3 categorize_competitors.py
+    The script will generate a new CSV file named filtered_companies.csv with the filtered companies.
+
+IV. Script
+
+Step 1: Load the CSV file
+
+The script loads the competitor.csv file using the csv module.
+
+python
+
+import csv
+
+with open('competitor.csv', 'r', encoding='utf-8') as file:
+    reader = csv.reader(file)
+    companies = list(reader)
+
+Step 2: Get the column names
+
+The script extracts the column names from the first row of the CSV file.
+
+python
+
+column_names = companies[0][1:]
+
+Step 3: Define the relevant services
+
+The script defines a list of relevant services related to bulk email sending and management.
+
+python
+
+relevant_services = [
+    'mass email', 'bulk email', 'high volume email sending', 
+    'email blast services', 'Mail Transfer Agent', 'MTA configuration', 
+    'MTA management', 'email system administration', 'email marketing', 
+    'email infrastructure', 'email system assessment', 'email monitoring'
+]
+
+Step 4: Filter the companies
+
+The script filters the companies based on the presence of relevant services in their service offerings.
+
+python
+
+filtered_companies = [column_names]  # Add column names to the filtered list
+for company in companies[1:]:
+    if any(service in company[2] for service in relevant_services):
+        filtered_companies.append(company[1:])
+
+Step 5: Save the filtered companies to a new CSV file
+
+The script saves the filtered companies to a new CSV file named filtered_companies.csv.
+
+python
+
+with open('filtered_companies.csv', 'w', newline='', encoding='utf-8') as file:
+    writer = csv.writer(file)
+    writer.writerows(filtered_companies)
+
+Input
+
+The script takes a CSV file named competitor.csv.
+Output
+
+The script generates a new CSV file named filtered_companies.csv with the filtered companies. The output CSV file has the same columns as the input CSV file.
+Implications
+
+    1. Competitor Analysis: The script enables competitor analysis by filtering companies that offer similar services, allowing for a more focused analysis of the competitive landscape.
+    2. Market Research: The script facilitates market research by identifying companies that offer specific services, enabling researchers to gather data on market trends, opportunities, and challenges.
+    3. Business Development: The script can be used for business development by identifying potential partners or clients that offer complementary services, enabling companies to explore new business opportunities.
+    4. Lead Generation: The script can be used for lead generation by identifying companies that offer specific services, enabling sales teams to target potential customers more effectively.
+    5. Data Enrichment: The script can be used for data enrichment by appending additional information to the filtered companies, such as company size, revenue, or industry, enabling more detailed analysis and insights.
+    6 Automation: The script automates the process of filtering companies based on specific services, saving time and effort compared to manual analysis.
+    7. Scalability: The script can be scaled to handle large datasets, making it an efficient solution for analyzing large numbers of companies.
+    8. Customizability: The script can be customized to filter companies based on specific criteria, such as location, industry, or company size, enabling users to tailor the analysis to their specific needs.
